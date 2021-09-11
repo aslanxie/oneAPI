@@ -22,4 +22,4 @@ In this test with 1M data, time on memory from ```malloc_device```is 70ms,  and 
 
 2.[shared memory and device memory](https://github.com/jeffhammond/dpcpp-tutorial)
 
-3. [oneAPI DPC++ Compiler and Runtime architecture design](https://intel.github.io/llvm-docs/CompilerAndRuntimeDesign.html)
+3.[oneAPI DPC++ Compiler and Runtime architecture design](https://intel.github.io/llvm-docs/CompilerAndRuntimeDesign.html)
