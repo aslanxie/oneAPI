@@ -21,3 +21,5 @@ In this test with 1M data, time on memory from ```malloc_device```is 70ms,  and 
 1.[Ahead of Time Compilation](https://software.intel.com/content/www/us/en/develop/documentation/oneapi-dpcpp-cpp-compiler-dev-guide-and-reference/top/compilation/ahead-of-time-compilation.html)
 
 2.[shared memory and device memory](https://github.com/jeffhammond/dpcpp-tutorial)
+
+3. [oneAPI DPC++ Compiler and Runtime architecture design](https://intel.github.io/llvm-docs/CompilerAndRuntimeDesign.html)
