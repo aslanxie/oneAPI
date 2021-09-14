@@ -16,3 +16,7 @@ device memory test...
 device memory time consuming：70ms
 ```
 
+Trace 
+```
+export SYCL_PI_TRACE=1
+```
