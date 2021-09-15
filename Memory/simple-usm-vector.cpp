@@ -8,6 +8,13 @@ using namespace cl::sycl;
 
 const int N = 1024*1024; //default vector size
 
+void output_dev_info( const device& dev, const std::string& selector_name) {
+  std::cout << selector_name << ": Selected device: " <<
+    dev.get_info<info::device::name>() << "\n";
+  std::cout << "                  -> Device vendor: " <<
+    dev.get_info<info::device::vendor>() << "\n";
+}
+
 int test_shared_memory(size_t length){
 
     clock_t start = clock();
@@ -56,7 +63,6 @@ int test_shared_memory(size_t length){
 
     return 0;    
 }
-
 
 int test_host_memory(size_t length){
 
@@ -171,22 +177,46 @@ int test_device_memory(size_t length){
 
 int main(int argc, char **argv){
     size_t length = 0;
-    if(argc < 2)
+    int type = 0;
+
+    if (argc == 1){
+        type =  0;
         length = N;
-    else
-        length = std::atoi(argv[1]);
+    }
+    else if(argc == 2){
+        type =  std::atoi(argv[1]);
+        length = N;
+    }
+    else if (argc == 3){
+        type =  std::atoi(argv[1]);
+        length = std::atoi(argv[2]);        
+    }        
+    else{
+        std::cout <<"Error command line!" << std::endl;
+        std::cout << argv[0] << "[type] [length]" << std::endl;
+        return -1;
+    }
+
+    clock_t start = clock();
+    output_dev_info( device{ gpu_selector{}}, "gpu_selector" );
+    std::cout << "selector time consuming：" << (clock() - start) / 1000 << "ms" << std::endl;
 
     std::cout << "Runing with vector size: " << length << std::endl;
 
-    std::cout << "shared memory test..." << std::endl;
-    test_shared_memory(length);
+    if(type == 0 || type == 3){
+        std::cout << "device memory test..." << std::endl;
+        test_device_memory(length);  
+    } 
+    
+    if(type == 0 || type == 2){
+        std::cout << "host memory test..." << std::endl;
+        test_host_memory(length);
+    }
 
-    std::cout << "host memory test..." << std::endl;
-    test_host_memory(length);
-
-    std::cout << "device memory test..." << std::endl;
-    test_device_memory(length);   
+    if(type == 0 || type == 1){
+        std::cout << "shared memory test..." << std::endl;
+        test_shared_memory(length);
+    }
 
     return 0;
-
 }
