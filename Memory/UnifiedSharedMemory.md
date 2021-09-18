@@ -3,7 +3,7 @@
 
 build command line
 ```
-dpcpp -fsycl -fsycl-targets=spir64_gen-unknown-unknown-sycldevice -Xs "-device dg2" -o simple-usm-vector simple-usm-vector.cpp
+dpcpp -fsycl -fsycl-targets=spir64_gen-unknown-unknown-sycldevice -Xs "-device *" -o simple-usm-vector simple-usm-vector.cpp
 ```
 running output
 ```
